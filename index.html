@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Temperature Converter</h1>
+    <div class="converter">
+      <input type="number" id="temperature" placeholder="Enter temperature">
+      <select id="conversion-type">
+        <option value="c-to-f">Celsius to Fahrenheit</option>
+        <option value="c-to-k">Celsius to Kelvin</option>
+        <option value="f-to-c">Fahrenheit to Celsius</option>
+        <option value="f-to-k">Fahrenheit to Kelvin</option>
+        <option value="k-to-c">Kelvin to Celsius</option> 
+        <option value="k-to-f">Kelvin to Fahrenheit</option>
+      </select>
+      <button id="convert-btn">Convert</button>
+      <div class="result-box">
+        <div id="result">Result will appear here</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Function to handle temperature conversion
+    document.getElementById('convert-btn').addEventListener('click', function () {
+      const temperature = parseFloat(document.getElementById('temperature').value);
+      const conversionType = document.getElementById('conversion-type').value;
+      const resultDiv = document.getElementById('result');
+      let result;
+
+      if (isNaN(temperature)) {
+        result = "Please enter a valid number.";
+      } else {
+        switch (conversionType) {
+          case "c-to-f":
+            result = `${temperature}°C is ${(temperature * 9 / 5 + 32).toFixed(2)}°F`;
+            break;
+          case "c-to-k":
+            result = `${temperature}°C is ${(temperature + 273.15).toFixed(2)}K`;
+            break;
+          case "f-to-c":
+            result = `${temperature}°F is ${((temperature - 32) * 5 / 9).toFixed(2)}°C`;
+            break;
+          case "f-to-k":
+            result = `${temperature}°F is ${(((temperature - 32) * 5 / 9) + 273.15).toFixed(2)}K`;
+            break;
+          case "k-to-c":
+            result = `${temperature}K is ${(temperature - 273.15).toFixed(2)}°C`;
+            break;
+          case "k-to-f":
+            result = `${temperature}K is ${(((temperature - 273.15) * 9 / 5) + 32).toFixed(2)}°F`;
+            break;
+          default:
+            result = "Invalid conversion type.";
+        }
+      }
+
+      resultDiv.textContent = result;
+    });
+  </script>
+</body>
+</html>
